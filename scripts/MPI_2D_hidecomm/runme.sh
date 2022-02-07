@@ -20,7 +20,7 @@ fi
 nprocs=$1
 
 # compile the code for Titan X
-nvcc -arch=sm_52 --compiler-bindir mpic++ --compiler-options -O3 MPI_Wave_2D_v3_cs.cu -DD_x=$2 -DD_y=$3
+nvcc -arch=sm_52 --compiler-bindir mpic++ --compiler-options -O3 MPI_Wave_2D_hidecomm.cu -DD_x=$2 -DD_y=$3
 
 # run
 run_cmd="-np $nprocs -rf gpu_rankfile_64 --mca btl_openib_if_include mlx4_0,mlx4_1 --mca btl_openib_ignore_locality 1 a.out"
