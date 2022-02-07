@@ -54,7 +54,7 @@ const int nt = 150;
 DAT    dx, dy, dz;
 size_t Nix, Niy, Niz;
 // GPU MPI
-#include "geocomp_unil_mpi3D_v4.h"
+#include "geocomp_unil_mpi3D.h"
 
 // Computing physics kernels /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 __global__ void init(DAT* x, DAT* y, DAT* z, DAT* P, int* coords, const DAT Lx, const DAT Ly, const DAT Lz, DAT dx, DAT dy, DAT dz, const int nx, const int ny, const int nz){
@@ -71,7 +71,7 @@ __global__ void compute_V(DAT* Vx, DAT* Vy, DAT* Vz, DAT* P, DAT dt, const DAT r
     int ix = blockIdx.x*blockDim.x + threadIdx.x; // thread ID, dimension x
     int iy = blockIdx.y*blockDim.y + threadIdx.y; // thread ID, dimension y
     int iz = blockIdx.z*blockDim.z + threadIdx.z; // thread ID, dimension z
-    
+
     CommOverlap();
 
     if (iz<nz && iy<ny && ix>0 && ix<nx){
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]){
     zeros(Vx ,nx+1,ny  ,nz  );
     zeros(Vy ,nx  ,ny+1,nz  );
     zeros(Vz ,nx  ,ny  ,nz+1);
-    // MPI sides    
+    // MPI sides
     init_sides(Vx ,nx+1,ny  ,nz  );
     init_sides(Vy ,nx  ,ny+1,nz  );
     init_sides(Vz ,nx  ,ny  ,nz+1);
