@@ -63,7 +63,7 @@ __global__ void compute_V(DAT* Vx, DAT* Vy, DAT* P, DAT dt, const DAT rho, DAT d
     // CommOverlap
     if ( istep==0 &&   ix>=BOUNDARY_WIDTH_X && ix<=(nx  )-1-BOUNDARY_WIDTH_X && 
                        iy>=BOUNDARY_WIDTH_Y && iy<=(ny  )-1-BOUNDARY_WIDTH_Y    ) return;
-    if ( istep==1 && ( ix< BOUNDARY_WIDTH_X || ix> (nx  )-1-BOUNDARY_WIDTH_X |
+    if ( istep==1 && ( ix< BOUNDARY_WIDTH_X || ix> (nx  )-1-BOUNDARY_WIDTH_X ||
                        iy< BOUNDARY_WIDTH_Y || iy> (ny  )-1-BOUNDARY_WIDTH_Y  ) ) return;
 
     if (iy<ny && ix>0 && ix<nx){
